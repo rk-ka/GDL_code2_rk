@@ -27,13 +27,27 @@ def mk_run_folders(run_folder, name1, name2, name3):
     else:
         print('run dirs OK')
 
-@try_func
-def copy_weights(run_folder, suff='.data-00000-of-00001', add='_'):
+def mk_folder(dirname):
 
+    if not os.path.exists(dirname):
+        os.mkdir(dirname)
+    else:
+        print("Dir: %s exist" % dirname)
+
+
+@try_func
+def copy_weights(run_folder, suff=False, add='_'):
+    """copy_weights(run_folder, suff=False, add='_'):
     suff = '.data-00000-of-00001'
-    shutil.copy(os.path.join(run_folder, 'weights/weights'+ suff), os.path.join(run_folder, 'weights/weights' + add + suff))
-    shutil.copy(os.path.join(run_folder, 'weights/weights.index'), os.path.join(run_folder, 'weights/weights_.index'))
-    print('copy OK:', os.path.join(run_folder, 'weights/weights' + add + suff))
+    """
+    if suff is True:
+        suff = '.data-00000-of-00001'
+        shutil.copy(os.path.join(run_folder, 'weights/weights'+ suff), os.path.join(run_folder, 'weights/weights' + add + suff))
+        shutil.copy(os.path.join(run_folder, 'weights/weights.index'), os.path.join(run_folder, 'weights/weights_.index'))
+        print('copy OK, .ckpt')
+    else:
+        shutil.copy(os.path.join(run_folder, 'weights/weights.h5'), os.path.join(run_folder, 'weights/weights.h5' + add))
+        print('copy OK, .h5')
 
 
 def timer(func):

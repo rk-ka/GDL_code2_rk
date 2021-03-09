@@ -237,8 +237,9 @@ def load_cifar(label, num):
     return (x_data, y_data)
 
 
-def load_celeb(data_name, image_size, batch_size):
-    data_folder = os.path.join("./data", data_name)
+def load_celeb(data_name, image_size, batch_size, path_name="./data"):
+    """(data_name, image_size, batch_size, path_name="./data")"""
+    data_folder = os.path.join(path_name, data_name)
 
     data_gen = ImageDataGenerator(preprocessing_function=lambda x: (x.astype('float32') - 127.5) / 127.5)
 
